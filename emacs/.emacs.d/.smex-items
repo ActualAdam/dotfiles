@@ -1,0 +1,23 @@
+
+;; ----- smex-history -----
+(
+ help
+ package-install
+ package-list-packages
+ package-refresh-contents
+ cd
+ 5x5
+ arp
+)
+
+;; ----- smex-data -----
+(
+ (package-refresh-contents . 1)
+ (package-list-packages . 1)
+ (package-install . 1)
+ (cider-jack-in . 4)
+ (help . 1)
+ (cider-eval-last-sexp-to-repl . 1)
+ (cider-eval-last-sexp . 1)
+ (cider-eval-region . 1)
+)

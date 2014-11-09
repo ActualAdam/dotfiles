@@ -1,0 +1,5 @@
+;;; -*- coding: utf-8 -*-
+(("/Users/adam/.emacs.d/elpa/cider-0.6.0/cider-autoloads.el" . 2960)
+ ("/Users/adam/.emacs.d/elpa/dash-2.9.0/dash-autoloads.el" . 169)
+ ("/Users/adam/.emacs.d/user.el" . 560)
+ ("/Users/adam/ws/clojure-noob/src/clojure_noob/core.clj" . 213))
