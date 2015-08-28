@@ -1,23 +1,30 @@
 
 ;; ----- smex-history -----
 (
- help
- package-install
+ ensime
+ getenv
  package-list-packages
- package-refresh-contents
  cd
- 5x5
- arp
+ package-install
+ find-library
+ undo
 )
 
 ;; ----- smex-data -----
 (
  (package-refresh-contents . 1)
- (package-list-packages . 1)
- (package-install . 1)
+ (package-list-packages . 3)
+ (package-install . 3)
  (cider-jack-in . 4)
  (help . 1)
  (cider-eval-last-sexp-to-repl . 1)
  (cider-eval-last-sexp . 1)
  (cider-eval-region . 1)
+ (make-directory . 1)
+ (find-library . 3)
+ (package-initialize . 1)
+ (undo . 1)
+ (cd . 1)
+ (ensime . 6)
+ (getenv . 4)
 )
