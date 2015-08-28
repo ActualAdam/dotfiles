@@ -1,0 +1,13 @@
+"*":
+  "exception-reporting":
+    userId: "c1752ab8-e049-611e-2c98-d40857b421ad"
+  welcome:
+    showOnStartup: false
+  core: {}
+  editor:
+    invisibles: {}
+    tabType: "soft"
+".dockerfile.source":
+  editor:
+    tabLength: 4
+    preferredLineLength: 120
