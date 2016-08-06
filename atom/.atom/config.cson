@@ -10,7 +10,7 @@
   editor:
     invisibles: {}
     tabType: "soft"
-    fontFamily: "Hasklig"
+    fontFamily: "Hack"
   "remote-edit": {}
   autosave:
     enabled: true
