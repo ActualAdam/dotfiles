@@ -1,0 +1,23 @@
+"*":
+  "exception-reporting":
+    userId: "c1752ab8-e049-611e-2c98-d40857b421ad"
+  welcome:
+    showOnStartup: false
+  core:
+    disabledPackages: [
+      "linter-scalac"
+    ]
+  editor:
+    invisibles: {}
+    tabType: "soft"
+    fontFamily: "Hack"
+  "remote-edit": {}
+  autosave:
+    enabled: true
+".dockerfile.source":
+  editor:
+    tabLength: 4
+    preferredLineLength: 120
+".scala.source":
+  editor:
+    preferredLineLength: 120
