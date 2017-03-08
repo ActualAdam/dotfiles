@@ -1,20 +1,18 @@
-export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/mysql/bin:$PATH"
+. ~/.env.sh
 . ~/.antigen.zsh
+. ~/.zsh_alias.zsh
+. "/usr/local/opt/nvm/nvm.sh"
+. ~/.env/madison-env.sh
 
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle docker
-antigen theme agnoster
-
-antigen bundle willghatch/zsh-snippets
-bindkey '\ee' snippet-expand
-snippet-add dl "{ docker-compose logs -f presenceweb & docker-compose logs -f mysql; }"  
-snippet-add dr "docker-compose down -v; docker-compose up -d"
-snippet-add dfi "FLYWAY_OPERATION=info docker-compose up flyway"
-snippet-add dfm "FLYWAY_OPERATION=migrate docker-compose up flyway"
+antigen theme amuse
 
 fortune -s -n 300 | cowsay
 
 antigen apply
 
 . <(azure --completion)
+
+flyway () { docker run -it --rm --net host -v `pwd`:/flyway-4.0.3/sql sctechdev/flyway $@ }

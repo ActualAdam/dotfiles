@@ -7,4 +7,4 @@ export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk1.7.0_71.jdk/Contents/Home
 
 alias less="less -R"
 
-[ -s "/Users/amille15/.dnx/dnvm/dnvm.sh" ] && . "/Users/amille15/.dnx/dnvm/dnvm.sh" # Load dnvm
+#[ -s "/Users/amille15/.dnx/dnvm/dnvm.sh" ] && . "/Users/amille15/.dnx/dnvm/dnvm.sh" # Load dnvm
