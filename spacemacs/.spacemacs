@@ -30,36 +30,58 @@ values."
    dotspacemacs-configuration-layer-path '()
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
-   '(
+   '(ansible
+     go
+     sql
+     python
+     (javascript :variables
+                 node-add-modules-path t)
      yaml
-     docker
-     html
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     ivy
-     ;; auto-completion
+     helm
+     (auto-completion :variables
+                      auto-completion-enable-help-tooltip t
+                      auto-completion-enable-snippets-in-popup t)
      ;; better-defaults
      emacs-lisp
      git
+     terraform
+     themes-megapack
      markdown
-     clojure
-     ;; org
+     org
      (shell :variables
-            shell-default-height 30
-            shell-default-position 'bottom
-            shell-default-eshell 'multi-term)
+            shell-default-position   'right
+            shell-default-shell      'ansi-term
+            shell-default-term-shell "/bins/zsh"
+            )
      ;; spell-checking
-     ;; syntax-checking
+     (syntax-checking :variables
+                      syntax-checking-enable-tooltups nil)
      ;; version-control
+     (lsp :variables
+         )
+     (java :variables
+           java-backend 'lsp)
+     groovy
+     elm
+     dap
+     neotree
+     prettier
+     (json :variables
+           json-fmt-tool 'prettier
+           js-indent-level 2)
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
    ;; packages, then consider creating a layer. You can also put the
    ;; configuration in `dotspacemacs/user-config'.
-   dotspacemacs-additional-packages '()
+   dotspacemacs-additional-packages
+   '(prettier-js
+     )
    ;; A list of packages that cannot be updated.
    dotspacemacs-frozen-packages '()
    ;; A list of packages that will not be installed and loaded.
@@ -131,14 +153,14 @@ values."
    ;; List of themes, the first of the list is loaded when spacemacs starts.
    ;; Press <SPC> T n to cycle to the next theme in the list (works great
    ;; with 2 themes variants, one dark and one light)
-   dotspacemacs-themes '(spacemacs-dark
-                         spacemacs-light)
+   dotspacemacs-themes '(darktooth
+                         material-light)
    ;; If non nil the cursor color matches the state color in GUI Emacs.
    dotspacemacs-colorize-cursor-according-to-state t
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    dotspacemacs-default-font '("Source Code Pro"
-                               :size 17
+                               :size 16
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -165,7 +187,6 @@ values."
    ;; In the terminal, these pairs are generally indistinguishable, so this only
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
-
    ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
    dotspacemacs-remap-Y-to-y$ nil
    ;; If non-nil, the shift mappings `<' and `>' retain visual state if used
@@ -226,7 +247,7 @@ values."
    dotspacemacs-loading-progress-bar t
    ;; If non nil the frame is fullscreen when Emacs starts up. (default nil)
    ;; (Emacs 24.4+ only)
-   dotspacemacs-fullscreen-at-startup t
+   dotspacemacs-fullscreen-at-startup nil
    ;; If non nil `spacemacs/toggle-fullscreen' will not use native fullscreen.
    ;; Use to disable fullscreen animations in OSX. (default nil)
    dotspacemacs-fullscreen-use-non-native nil
@@ -248,14 +269,25 @@ values."
    dotspacemacs-show-transient-state-color-guide t
    ;; If non nil unicode symbols are displayed in the mode line. (default t)
    dotspacemacs-mode-line-unicode-symbols t
+   dotspacemacs-mode-line-theme 'spacemacs  
    ;; If non nil smooth scrolling (native-scrolling) is enabled. Smooth
    ;; scrolling overrides the default behavior of Emacs which recenters point
    ;; when it reaches the top or bottom of the screen. (default t)
    dotspacemacs-smooth-scrolling t
-   ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
-   ;; derivatives. If set to `relative', also turns on relative line numbers.
+   ;; Control line numbers activation.
+   ;; If set to `t' or `relative' line numbers are turned on in all `prog-mode' and
+   ;; `text-mode' derivatives. If set to `relative', line numbers are relative.
+   ;; This variable can also be set to a property list for finer control:
+   ;; '(:relative nil
+   ;;   :disabled-for-modes dired-mode
+   ;;                       doc-view-mode
+   ;;                       markdown-mode
+   ;;                       org-mode
+   ;;                       pdf-view-mode
+   ;;                       text-mode
+   ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers '(:relative t)
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
@@ -286,7 +318,7 @@ values."
    ;; `trailing' to delete only the whitespace at end of lines, `changed'to
    ;; delete only whitespace for changed lines or `nil' to disable cleanup.
    ;; (default nil)
-   dotspacemacs-whitespace-cleanup 'changed
+   dotspacemacs-whitespace-cleanup nil
    ))
 
 (defun dotspacemacs/user-init ()
@@ -296,6 +328,10 @@ executes.
  This function is mostly useful for variables that need to be set
 before packages are loaded. If you are unsure, you should try in setting them in
 `dotspacemacs/user-config' first."
+  (setq configuration-layer-elpa-archives
+        '(("melpa"    . "melpa.org/packages/")
+          ("org"      . "orgmode.org/elpa/")
+          ("gnu"      . "elpa.gnu.org/packages/")))
   )
 
 (defun dotspacemacs/user-config ()
@@ -305,10 +341,39 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified that a variable should be set before a package is loaded,
 you should place your code here."
-  (setq clojure-enable-fancify-symbols t)
-  (setq cider-repl-pop-to-buffer-on-connect t)
-  (setq cider-repl-display-in-current-window t)
-  (setq mouse-wheel-scroll-amount '(1 ((shift) . 1)))
+  (setq neo-window-fixed-size nil)
+  (setq projectile-project-search-path '("~/ws/"))
+  (setq lsp-java-vmargs '("-javaagent:/Users/actualadam/.m2/repository/org/projectlombok/lombok/1.18.4/lombok-1.18.4.jar" "-Xbootclasspath/a:/Users/actualadam/.m2/repository/org/projectlombok/lombok/1.18.4/lombok-1.18.4.jar"))
+
+  ;; automatically save buffers associated with files on buffer switch
+  ;; and on windows switch
+  (defadvice switch-to-buffer (before save-buffer-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice other-window (before other-window-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice windmove-up (before other-window-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice windmove-down (before other-window-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice windmove-left (before other-window-now activate)
+    (when buffer-file-name (save-buffer)))
+  (defadvice windmove-right (before other-window-now activate)
+    (when buffer-file-name (save-buffer)))
+  (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
+
+  ;; prettier even prettier
+  (eval-after-load 'web-mode
+    '(progn
+       (add-hook 'web-mode-hook #'add-node-modules-path)))
+  (require 'prettier-js)
+  (setq prettier-js-command "prettier-eslint_d")
+
+  (with-eval-after-load 'company
+    (add-to-list 'company-backend 'company-elm))
+
+  ;; allows flycheck to appear in the sideline 
+;;  (add-hook 'lsp-ui-mode-hook 'flycheck-mode)
+
   )
 
 ;; Do not write anything past this comment. This is where Emacs will
@@ -320,15 +385,183 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (xterm-color shell-pop multi-term eshell-z eshell-prompt-extras esh-help yaml-mode dockerfile-mode docker json-mode tablist docker-tramp json-snatcher json-reformat web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode haml-mode emmet-mode clj-refactor inflections edn multiple-cursors paredit yasnippet peg cider-eval-sexp-fu cider seq queue clojure-mode smeargle orgit org mmm-mode markdown-toc markdown-mode magit-gitflow gitignore-mode gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link gh-md evil-magit magit magit-popup git-commit with-editor ws-butler window-numbering which-key wgrep volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline smex restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint ivy-hydra info+ indent-guide ido-vertical-mode hydra hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation hide-comnt help-fns+ helm-make helm helm-core google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu highlight elisp-slime-nav dumb-jump popup f s diminish define-word counsel-projectile projectile pkg-info epl counsel swiper ivy column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed dash async aggressive-indent adaptive-wrap ace-window ace-link avy quelpa package-build spacemacs-theme)))
- '(safe-local-variable-values
-   (quote
-    ((cider-cljs-lein-repl . "(do (dev) (go) (cljs-repl))")
-     (cider-refresh-after-fn . "reloaded.repl/resume")
-     (cider-refresh-before-fn . "reloaded.repl/suspend")))))
+    (ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async))))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+(defun dotspacemacs/emacs-custom-settings ()
+  "Emacs custom settings.
+This is an auto-generated function, do not modify its content directly, use
+Emacs customize menu instead.
+This function is called at the very end of Spacemacs initialization."
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(ansi-color-faces-vector
+   [default bold shadow italic underline bold bold-italic bold])
+ '(ansi-term-color-vector
+   [unspecified "#1F1611" "#660000" "#144212" "#EFC232" "#5798AE" "#BE73FD" "#93C1BC" "#E6E1DC"])
+ '(beacon-color "#f2777a")
+ '(company-quickhelp-color-background "#4F4F4F")
+ '(company-quickhelp-color-foreground "#DCDCCC")
+ '(compilation-message-face (quote default))
+ '(cua-global-mark-cursor-color "#2aa198")
+ '(cua-normal-cursor-color "#657b83")
+ '(cua-overwrite-cursor-color "#b58900")
+ '(cua-read-only-cursor-color "#859900")
+ '(diary-entry-marker (quote font-lock-variable-name-face))
+ '(emms-mode-line-icon-image-cache
+   (quote
+    (image :type xpm :ascent center :data "/* XPM */
+static char *note[] = {
+/* width height num_colors chars_per_pixel */
+\"    10   11        2            1\",
+/* colors */
+\". c #358d8d\",
+\"# c None s None\",
+/* pixels */
+\"###...####\",
+\"###.#...##\",
+\"###.###...\",
+\"###.#####.\",
+\"###.#####.\",
+\"#...#####.\",
+\"....#####.\",
+\"#..######.\",
+\"#######...\",
+\"######....\",
+\"#######..#\" };")))
+ '(evil-emacs-state-cursor (quote ("#D50000" hbar)) t)
+ '(evil-insert-state-cursor (quote ("#D50000" bar)) t)
+ '(evil-normal-state-cursor (quote ("#F57F17" box)) t)
+ '(evil-visual-state-cursor (quote ("#66BB6A" box)) t)
+ '(evil-want-Y-yank-to-eol nil)
+ '(fci-rule-character-color "#452E2E")
+ '(fci-rule-color "#515151" t)
+ '(flycheck-color-mode-line-face-to-color (quote mode-line-buffer-id))
+ '(frame-background-mode (quote dark))
+ '(gnus-logo-colors (quote ("#259ea2" "#adadad")) t)
+ '(gnus-mode-line-image-cache
+   (quote
+    (image :type xpm :ascent center :data "/* XPM */
+static char *gnus-pointer[] = {
+/* width height num_colors chars_per_pixel */
+\"    18    13        2            1\",
+/* colors */
+\". c #358d8d\",
+\"# c None s None\",
+/* pixels */
+\"##################\",
+\"######..##..######\",
+\"#####........#####\",
+\"#.##.##..##...####\",
+\"#...####.###...##.\",
+\"#..###.######.....\",
+\"#####.########...#\",
+\"###########.######\",
+\"####.###.#..######\",
+\"######..###.######\",
+\"###....####.######\",
+\"###..######.######\",
+\"###########.######\" };")) t)
+ '(highlight-changes-colors (quote ("#d33682" "#6c71c4")))
+ '(highlight-indent-guides-auto-enabled nil)
+ '(highlight-symbol-colors
+   (quote
+    ("#F57F17" "#66BB6A" "#0097A7" "#42A5F5" "#7E57C2" "#D84315")))
+ '(highlight-symbol-foreground-color "#546E7A")
+ '(highlight-tail-colors (quote (("#F8BBD0" . 0) ("#FAFAFA" . 100))))
+ '(hl-bg-colors
+   (quote
+    ("#DEB542" "#F2804F" "#FF6E64" "#F771AC" "#9EA0E5" "#69B7F0" "#69CABF" "#B4C342")))
+ '(hl-fg-colors
+   (quote
+    ("#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3" "#fdf6e3")))
+ '(hl-paren-colors (quote ("#2aa198" "#b58900" "#268bd2" "#6c71c4" "#859900")))
+ '(hl-sexp-background-color "#efebe9")
+ '(hl-todo-keyword-faces
+   (quote
+    (("TODO" . "#dc752f")
+     ("NEXT" . "#dc752f")
+     ("THEM" . "#2d9574")
+     ("PROG" . "#4f97d7")
+     ("OKAY" . "#4f97d7")
+     ("DONT" . "#f2241f")
+     ("FAIL" . "#f2241f")
+     ("DONE" . "#86dc2f")
+     ("NOTE" . "#b1951d")
+     ("KLUDGE" . "#b1951d")
+     ("HACK" . "#b1951d")
+     ("TEMP" . "#b1951d")
+     ("FIXME" . "#dc752f")
+     ("XXX" . "#dc752f")
+     ("XXXX" . "#dc752f"))))
+ '(jdee-db-active-breakpoint-face-colors (cons "#1c1f2b" "#c792ea"))
+ '(jdee-db-requested-breakpoint-face-colors (cons "#1c1f2b" "#c3e88d"))
+ '(jdee-db-spec-breakpoint-face-colors (cons "#1c1f2b" "#676E95"))
+ '(linum-format " %7i ")
+ '(nrepl-message-colors
+   (quote
+    ("#CC9393" "#DFAF8F" "#F0DFAF" "#7F9F7F" "#BFEBBF" "#93E0E3" "#94BFF3" "#DC8CC3")))
+ '(objed-cursor-color "#ff5370")
+ '(package-selected-packages
+   (quote
+    (mmm-mode ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package toc-org spaceline powerline restart-emacs request rainbow-delimiters popwin persp-mode pcre2el paradox spinner org-plus-contrib org-bullets open-junk-file neotree move-text macrostep lorem-ipsum linum-relative link-hint indent-guide hydra lv hungry-delete hl-todo highlight-parentheses highlight-numbers parent-mode highlight-indentation helm-themes helm-swoop helm-projectile projectile pkg-info epl helm-mode-manager helm-make helm-flx helm-descbinds helm-ag google-translate golden-ratio flx-ido flx fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist highlight evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-lisp-state smartparens evil-indent-plus evil-iedit-state iedit evil-exchange evil-escape evil-ediff evil-args evil-anzu anzu evil goto-chg undo-tree eval-sexp-fu elisp-slime-nav dumb-jump f dash s diminish define-word column-enforce-mode clean-aindent-mode bind-map bind-key auto-highlight-symbol auto-compile packed aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line helm avy helm-core popup async)))
+ '(pdf-view-midnight-colors (quote ("#eeeeee" . "#000000")))
+ '(pos-tip-background-color "#ffffffffffff")
+ '(pos-tip-foreground-color "#78909C")
+ '(smartrep-mode-line-active-bg (solarized-color-blend "#859900" "#eee8d5" 0.2))
+ '(tabbar-background-color "#ffffffffffff")
+ '(term-default-bg-color "#fdf6e3")
+ '(term-default-fg-color "#657b83")
+ '(vc-annotate-background nil)
+ '(vc-annotate-background-mode nil)
+ '(vc-annotate-color-map
+   (quote
+    ((20 . "#f2777a")
+     (40 . "#f99157")
+     (60 . "#ffcc66")
+     (80 . "#99cc99")
+     (100 . "#66cccc")
+     (120 . "#6699cc")
+     (140 . "#cc99cc")
+     (160 . "#f2777a")
+     (180 . "#f99157")
+     (200 . "#ffcc66")
+     (220 . "#99cc99")
+     (240 . "#66cccc")
+     (260 . "#6699cc")
+     (280 . "#cc99cc")
+     (300 . "#f2777a")
+     (320 . "#f99157")
+     (340 . "#ffcc66")
+     (360 . "#99cc99"))))
+ '(vc-annotate-very-old-color nil)
+ '(weechat-color-list
+   (quote
+    (unspecified "#fdf6e3" "#eee8d5" "#990A1B" "#dc322f" "#546E00" "#859900" "#7B6000" "#b58900" "#00629D" "#268bd2" "#93115C" "#d33682" "#00736F" "#2aa198" "#657b83" "#839496")))
+ '(when
+      (or
+       (not
+        (boundp
+         (quote ansi-term-color-vector)))
+       (not
+        (facep
+         (aref ansi-term-color-vector 0)))))
+ '(window-divider-mode nil)
+ '(xterm-color-names
+   ["#F1EBDD" "#A33555" "#BF5637" "#666E4D" "#3A6E64" "#665843" "#687366" "#50484e"])
+ '(xterm-color-names-bright
+   ["#EBE7D9" "#DB4764" "#CE6A38" "#649888" "#848F86" "#857358" "#50484e"]))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )
+)
