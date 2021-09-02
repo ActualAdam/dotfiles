@@ -1,8 +1,7 @@
+zmodload zsh/zprof
 . ~/.env.sh
 . ~/.antigen.zsh
 . ~/.zsh_alias.zsh
-. /usr/local/bin/virtualenvwrapper.sh
-#. "/usr/local/opt/nvm/nvm.sh"
 
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -13,9 +12,6 @@ antigen bundle github
 antigen bundle aws
 antigen bundle zsh_reload
 antigen bundle vi-mode
-antigen bundle virtualenvwrapper
-
-fortune -s -n 300 | cowsay
 
 antigen apply
 
@@ -46,10 +42,36 @@ function edit-mode-cursor () {
     fi
 }
 
+load_nvm() {
+  export NVM_DIR="$HOME/.nvm"
+  [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+  [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+}
 
-#THIS MUST BE AT THE END OF THE FILE FOR SDKMAN TO WORK!!!
-export SDKMAN_DIR="/Users/actualadam/.sdkman"
-[[ -s "/Users/actualadam/.sdkman/bin/sdkman-init.sh" ]] && source "/Users/actualadam/.sdkman/bin/sdkman-init.sh"
+load_virtualenv() {
+  /usr/local/bin/virtualenvwrapper.sh
+  antigen bundle virtualenvwrapper
+}
+
 
 autoload -U +X bashcompinit && bashcompinit
 complete -o nospace -C /usr/local/bin/terraform terraform
+
+timezsh() {
+  shell=${1-$SHELL}
+  for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
+}
+
+export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+echo "org.gradle.java.home=$JAVA_HOME" > /Users/actualadam/.gradle/gradle.properties
+
+
+# tabtab source for serverless package
+# uninstall by removing these lines or running `tabtab uninstall serverless`
+[[ -f /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/serverless.zsh
+# tabtab source for sls package
+# uninstall by removing these lines or running `tabtab uninstall sls`
+[[ -f /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/sls.zsh
+# tabtab source for slss package
+# uninstall by removing these lines or running `tabtab uninstall slss`
+[[ -f /Users/actualadam/ws/cs-flood/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/actualadam/ws/cs-flood/node_modules/tabtab/.completions/slss.zsh
