@@ -18,6 +18,7 @@ antigen apply
 set editind-mode vi
 set blink-matching-paren on 
 
+
 # zle-keymap-select () {
 #   edit-mode-cursor
 # }
@@ -62,9 +63,12 @@ timezsh() {
   for i in $(seq 1 10); do /usr/bin/time $shell -i -c exit; done
 }
 
-export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
-echo "org.gradle.java.home=$JAVA_HOME" > /Users/actualadam/.gradle/gradle.properties
+load_nvm
 
+# export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
+# echo "org.gradle.java.home=$JAVA_HOME" > /Users/actualadam/.gradle/gradle.properties
+
+. "$HOME/.sdkman/bin/sdkman-init.sh"
 
 # tabtab source for serverless package
 # uninstall by removing these lines or running `tabtab uninstall serverless`
