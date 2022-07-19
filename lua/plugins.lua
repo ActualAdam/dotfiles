@@ -36,6 +36,45 @@ local function declarePlugins(use)
         end,
         requires = { "nvim-web-devicons" },
     }
+
+    use({ "junegunn/fzf" })
+    use({ "junegunn/fzf.vim" })
+    use {
+     "ibhagwan/fzf-lua",
+      requires = { "kyazdani42/nvim-web-devicons" },
+    }
+
+    use {
+        "kyazdani42/nvim-tree.lua",
+        requires = {
+            "nvim-web-devicons",
+        },
+        cmd = { "NvimTreeToggle", "NvimTreeClose" },
+        config = function()
+            require("config.nvimtree").setup()
+        end,
+    }
+
+    use {
+        "windwp/nvim-autopairs",
+        wants = { 
+            "nvim-treesitter",
+        },
+        module = { 
+            "nvim-autopairs.completion.cmp", 
+            "nvim-autopairs" 
+        },
+        config = function()
+            require("config.autopairs").setup()
+        end,
+    }
+
+    use {
+        "Shatur/neovim-ayu",
+        config = function() 
+            require("config.ayu").setup()
+        end 
+    }
 end
 
 function plugins.setup() 
