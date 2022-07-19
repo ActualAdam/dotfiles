@@ -47,7 +47,6 @@ vim.opt.conceallevel = 0     -- show raw text instead of concealing markup
 vim.api.nvim_set_keymap("", "<Space>", "<Nop>", { noremap = true, silent = true })
 vim.g.mapleader = " "
 vim.g.maplocalleader = " "
-vim.api.nvim_set_keymap("n", "<Leader>", ":WhichKey<CR>", { noremap = true, silent = true })
 
 
  -- syntax enable

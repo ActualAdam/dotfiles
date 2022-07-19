@@ -1,7 +1,7 @@
 local plugins = {}
 
 local function declarePlugins(use)
-    use "wbthomason/packer.nvim"
+    use({"wbthomason/packer.nvim"})
 
     use {
         "nvim-treesitter/nvim-treesitter",

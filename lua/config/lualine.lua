@@ -1,7 +1,7 @@
-local M = {}
+local lualine = {}
 
-function M.setup() 
-    require('lualine')setup()
+function lualine.setup() 
+    require("lualine").setup()
 end
 
-return M
+return lualine

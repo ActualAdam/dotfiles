@@ -1,4 +1,4 @@
-require("keymap")
+require("keymap").setup()
 require("plugins").setup()
 
 local servers = {

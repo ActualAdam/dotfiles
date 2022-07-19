@@ -1,12 +1,12 @@
-local M = {}
+local whichkey = {}
 
-function M.setup() 
-    local whichkey = require "which-key"
+function whichkey.setup() 
+    local which_key = require("which-key")
 
     local conf = {
         window = {
-            border = "single"
-            position = "bottom"
+            border = "single",
+            position = "bottom",
         },
     }
 
@@ -24,8 +24,8 @@ function M.setup()
         ["q"] = { "<cmd>q!<CR>", "Quit" },
     }
 
-    whichkey.setup(conf)
-    whichkey.register(mappings, opts)
+    which_key.setup(conf)
+    which_key.register(mappings, opts)
 end
 
-return M
+return whichkey

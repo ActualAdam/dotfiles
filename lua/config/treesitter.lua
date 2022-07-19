@@ -1,7 +1,7 @@
-local M = {}
+local treesitter = {}
 
-function M.setup() 
-    require('nvim-treesitter.configs').setup {
+function treesitter.setup() 
+    require("nvim-treesitter.configs").setup {
         auto_install = true,
         highlight = {
             enable = true,
@@ -12,4 +12,4 @@ function M.setup()
     }
 end
 
-return M
+return treesitter
