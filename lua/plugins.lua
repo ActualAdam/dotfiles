@@ -4,6 +4,13 @@ local function declarePlugins(use)
     use({"wbthomason/packer.nvim"})
 
     use {
+        "famiu/nvim-reload",
+        requires = {
+            "nvim-lua/plenary.nvim",
+        }
+    }
+
+    use {
         "neovim/nvim-lspconfig",
         opt = true,
         event = "BufReadPre",

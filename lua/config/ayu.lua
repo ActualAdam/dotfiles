@@ -1,8 +1,8 @@
 local ayu = {}
 
-function ayu.setup() 
+function ayu.setup()
     require("ayu").setup({
-        mirage = true,
+        mirage = false,
         overrides = {},
     })
 end
