@@ -1,6 +1,6 @@
 local whichkey = {}
 
-function whichkey.setup() 
+function whichkey.setup()
     local which_key = require("which-key")
 
     local conf = {
@@ -30,7 +30,7 @@ function whichkey.setup()
             g = { "<cmd>FzfLua live_grep<cr>", "Live grep" },
             c = { "<cmd>FzfLua commands<cr>", "Commands" },
             e = { "<cmd>NvimTreeToggle<cr>", "Explorer" },
-        },    
+        },
     }
 
     which_key.setup(conf)
