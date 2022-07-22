@@ -1,13 +1,13 @@
-local M = {}
+local cmp = {}
 
-function M.setup()
+function cmp.setup()
     local has_words_before = function()
         local line, col = unpack(vim.api.nvim_win_get_cursor(0))
         return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match "%s" == nil
     end
 
     local luasnip = require("luasnip")
-    local cmp = require "cmp"
+    local cmp = require("cmp")
 
     cmp.setup {
         completion = { completeopt = "menu,menuone,noinsert", keyword_length = 1 },
@@ -86,4 +86,4 @@ function M.setup()
   cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done { map_char = { tex = "" } })
 end
 
-return M
+return cmp

@@ -2,10 +2,10 @@
 vim.opt.sw = 4                    -- indentation 4 spaces
 vim.opt.ts = 4                    -- tab displays as 4 spaces
 vim.opt.expandtab = true              -- tab key is the same as space x 4 
-vim.opt.smarttab = true 
+vim.opt.smarttab = true
 vim.opt.smartindent = true
 vim.opt.autoindent = true
-vim.opt.showtabline = 4 
+vim.opt.showtabline = 4
 
 
 -- line numbering
@@ -20,7 +20,7 @@ vim.opt.ruler = true                   -- cursor position
 
 vim.opt.hidden = true                  -- lets you switch buffers without saving
 
-vim.opt.cmdheight = 2 
+vim.opt.cmdheight = 2
 vim.opt.pumheight = 10            -- popup menu height (smaller than default)
 vim.opt.laststatus = 0            -- always show the status line
 vim.opt.showmode = false
