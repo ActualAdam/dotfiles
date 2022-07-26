@@ -1,4 +1,6 @@
 sbt/.sbt/boot
 sbt/.sbt/0.13/staging
+
 .DS_Store
-/plugin/
+
+nvim/.config/nvim/plugin/
