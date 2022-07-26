@@ -20,9 +20,9 @@ vim.opt.ruler = true                   -- cursor position
 
 vim.opt.hidden = true                  -- lets you switch buffers without saving
 
-vim.opt.cmdheight = 2
+vim.opt.cmdheight = 1
 vim.opt.pumheight = 10            -- popup menu height (smaller than default)
-vim.opt.laststatus = 0            -- always show the status line
+vim.opt.laststatus = 2            -- always show the status line
 vim.opt.showmode = false
 
 vim.opt.backup = false                -- backups don't spark joy

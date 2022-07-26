@@ -1,6 +1,6 @@
 local lualine = {}
 
-function lualine.setup() 
+function lualine.setup()
     require("lualine").setup {
         options = {
             theme = "ayu",
