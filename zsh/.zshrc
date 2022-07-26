@@ -7,10 +7,9 @@ antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
 antigen bundle zsh-users/zsh-completions
 antigen bundle docker
-antigen theme amuse
+antigen theme ~/ws/actualadam/ahoy-hoy-zsh inthelupine.zsh-theme
 antigen bundle github 
 antigen bundle aws
-antigen bundle zsh_reload
 antigen bundle vi-mode
 
 antigen apply
