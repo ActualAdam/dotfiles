@@ -17,6 +17,8 @@ antigen apply
 set editind-mode vi
 set blink-matching-paren on 
 
+export EDITOR=nvim
+export PAGER=bat
 
 # zle-keymap-select () {
 #   edit-mode-cursor
