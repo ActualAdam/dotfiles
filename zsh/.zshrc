@@ -70,13 +70,3 @@ load_nvm
 # echo "org.gradle.java.home=$JAVA_HOME" > /Users/actualadam/.gradle/gradle.properties
 
 . "$HOME/.sdkman/bin/sdkman-init.sh"
-
-# tabtab source for serverless package
-# uninstall by removing these lines or running `tabtab uninstall serverless`
-[[ -f /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/serverless.zsh ]] && . /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/serverless.zsh
-# tabtab source for sls package
-# uninstall by removing these lines or running `tabtab uninstall sls`
-[[ -f /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/sls.zsh ]] && . /Users/actualadam/ws/cs-lingest/node_modules/tabtab/.completions/sls.zsh
-# tabtab source for slss package
-# uninstall by removing these lines or running `tabtab uninstall slss`
-[[ -f /Users/actualadam/ws/cs-flood/node_modules/tabtab/.completions/slss.zsh ]] && . /Users/actualadam/ws/cs-flood/node_modules/tabtab/.completions/slss.zsh
