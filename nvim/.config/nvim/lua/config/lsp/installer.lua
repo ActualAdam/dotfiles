@@ -10,6 +10,7 @@ function installer.setup(servers, options)
         if server_available then
             server:on_ready(function()
                 local opts = vim.tbl_deep_extend("force", options, servers[server.name] or {})
+               -- server:setup(require("coq").lsp_ensure_capabilities(opts))
                 server:setup(opts)
             end)
 
