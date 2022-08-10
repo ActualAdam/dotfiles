@@ -1,16 +1,12 @@
-* clone this repo into your homedir
-* clone the following repo or just get the files you know you like https://github.com/powerline/fonts.git
-  * I like the `hack` font family.
-  * Find `hack` in Finder, double tap, install font.
-  * todo: don't forget to account for `hasklig` in these docs
-* iTerm2
-  * set font in iTerm2
-  * set solarized profile in iTerm2
-* set font in Atom
-* stow all the packages you like
-* Install and configure zsh
-  * `cd ~/dotfiles && stow zsh`
-  * `brew install zsh`
-  * add `/usr/local/bin/zsh` to `etc/shells`
-  * `chsh -s /usr/local/bin/zsh`
-  * restart iTerm2
+## Fonts
+Preview here https://www.programmingfonts.org/#hasklig
+
+Download here https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hasklig.zip
+
+todo: Mac os fontbook only needs a subset of the inlcuded fonts. enumerate
+
+## Installing configurations 
+
+* clone this repo to ~
+* cd ~/dotfiles
+* use `stow` to install desired configs. Stow symlinks the file trees in each package to their relative locations in `..` For example `stow tmux` will create a link `~/.config/tmux/tmux.conf` targetting `~/dotfiles/tmux/.config/tmux/tmux.conf`
