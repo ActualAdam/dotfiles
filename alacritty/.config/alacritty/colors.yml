@@ -111,6 +111,6 @@ schemes:
         foreground: '#483e41'
 
       
-colors: *dark
+colors: *light
 
 
