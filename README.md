@@ -10,3 +10,10 @@ todo: Mac os fontbook only needs a subset of the inlcuded fonts. enumerate
 * clone this repo to ~
 * cd ~/dotfiles
 * use `stow` to install desired configs. Stow symlinks the file trees in each package to their relative locations in `..` For example `stow tmux` will create a link `~/.config/tmux/tmux.conf` targetting `~/dotfiles/tmux/.config/tmux/tmux.conf`
+
+
+## brew tools
+- ripgrep
+- fzf
+- stow
+-  
