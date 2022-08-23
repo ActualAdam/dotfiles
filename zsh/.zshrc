@@ -1,3 +1,5 @@
+# Fig pre block. Keep at the top of this file.
+[[ -f "$HOME/.fig/shell/zshrc.pre.zsh" ]] && . "$HOME/.fig/shell/zshrc.pre.zsh"
 zmodload zsh/zprof
 . ~/.env.sh
 . ~/.antigen.zsh
@@ -78,3 +80,6 @@ dark() {
 # echo "org.gradle.java.home=$JAVA_HOME" > /Users/actualadam/.gradle/gradle.properties
 
 . "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# Fig post block. Keep at the bottom of this file.
+[[ -f "$HOME/.fig/shell/zshrc.post.zsh" ]] && . "$HOME/.fig/shell/zshrc.post.zsh"
