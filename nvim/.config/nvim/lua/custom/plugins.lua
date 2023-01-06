@@ -1,10 +1,4 @@
 return function(use)
-  use {
-    "folke/which-key.nvim",
-    config = function()
-      require("which-key").setup {}
-    end
-  }
 
   use {
     "tzachar/cmp-tabnine",
@@ -16,10 +10,8 @@ return function(use)
   }
 
   use {
-    "windwp/nvim-autopairs",
-    config = function()
-      require("nvim-autopairs").setup {}
-    end
+    "mfussenegger/nvim-jdtls",
+    ft = { "java" }
   }
 end
 
