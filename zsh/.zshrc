@@ -19,6 +19,7 @@ set blink-matching-paren on
 
 export EDITOR=nvim
 export PAGER=bat
+export MANPAGER="sh -c 'col -bx | bat -l man -p'"
 
 # zle-keymap-select () {
 #   edit-mode-cursor
