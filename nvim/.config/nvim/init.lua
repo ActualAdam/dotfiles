@@ -53,6 +53,8 @@ require('packer').startup(function(use)
   -- Fuzzy Finder Algorithm which requires local dependencies to be built. Only load if `make` is available
   use { 'nvim-telescope/telescope-fzf-native.nvim', run = 'make', cond = vim.fn.executable 'make' == 1 }
 
+  use { "simrat39/rust-tools.nvim" }
+
   -- Add custom plugins to packer from ~/.config/nvim/lua/custom/plugins.lua
   local has_plugins, plugins = pcall(require, 'custom.plugins')
   if has_plugins then
@@ -204,7 +206,28 @@ vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { de
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'typescript', 'help', 'java', 'kotlin', 'markdown', 'sql', 'clojure', 'dockerfile', 'yaml', 'json', 'hcl', 'make' },
+  ensure_installed = {
+    'c',
+    'cpp',
+    'rust',
+    'toml',
+    'go',
+    'python',
+    'typescript',
+    'lua',
+    'help',
+    'java',
+    'kotlin',
+    'clojure',
+    'sql',
+    'svelte',
+    'markdown',
+    'json',
+    'hcl',
+    'dockerfile',
+    'yaml',
+    'make',
+  },
 
   highlight = { enable = true },
   indent = { enable = true, disable = { 'python' } },
@@ -323,25 +346,28 @@ local servers = {
   -- clangd = {},
   -- gopls = {},
   -- pyright = {},
-  -- rust_analyzer = {},
+  rust_analyzer = {},
+  taplo = {},
   tsserver = {},
-
   jdtls = {},
-
   kotlin_language_server = {},
-
   clojure_lsp = {},
-
   sumneko_lua = {
     Lua = {
       workspace = { checkThirdParty = false },
       telemetry = { enable = false },
     },
   },
+  tailwindcss = {},
+  svelte = {},
 }
+
 
 -- Setup neovim lua configuration
 require('neodev').setup()
+
+require('rust-tools').setup()
+
 --
 -- nvim-cmp supports additional completion capabilities, so broadcast that to servers
 local capabilities = vim.lsp.protocol.make_client_capabilities()
