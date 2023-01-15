@@ -27,6 +27,22 @@ function general.setup()
 	vim.o.updatetime = 250
 	vim.wo.signcolumn = 'yes'
 
+	vim.o.expandtab = true
+	vim.o.ts = 4
+	vim.o.sw = 4
+	vim.o.softtabstop = 4
+
+	-- [[ Highlight on yank ]]
+	-- See `:help vim.highlight.on_yank()`
+	local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
+	vim.api.nvim_create_autocmd('TextYankPost', {
+	  callback = function()
+	    vim.highlight.on_yank()
+	  end,
+	  group = highlight_group,
+	  pattern = '*',
+	})
+
 	-- Set colorscheme
 	vim.o.termguicolors = true
 	vim.cmd('colorscheme onedark')
