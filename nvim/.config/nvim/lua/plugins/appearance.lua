@@ -1,7 +1,7 @@
-return function(use)
-  use 'navarasu/onedark.nvim' -- Theme inspired by Atom
+return {
+  'navarasu/onedark.nvim', -- Theme inspired by Atom
 
-  use { -- Fancier statusline
+  { -- Fancier statusline
     'nvim-lualine/lualine.nvim',
     config = function()
       require('lualine').setup {
@@ -13,12 +13,19 @@ return function(use)
         },
       }
     end,
-  }
+  },
 
-  use {
+  {
     "folke/which-key.nvim",
     config = function()
       require("which-key").setup {}
     end
+  },
+
+  {
+    "nvim-tree/nvim-web-devicons",
+    config = function()
+      require("nvim-web-devicons").setup()
+    end
   }
-end
+}
