@@ -9,6 +9,10 @@ return {
       -- See `:help telescope` and `:help telescope.setup()`
       require('telescope').setup {
         defaults = {
+          file_ignore_patterns = {
+            "^.git/",
+            "^target",
+          },
           mappings = {
             i = {
               ['<C-u>'] = false,
@@ -16,6 +20,20 @@ return {
             },
           },
         },
+        pickers = {
+          find_files = {
+            find_command = { "fd", "--type", "f" },
+            hidden = true,
+          }
+        },
+        extensions = {
+          file_browser = {
+            hidden = true,
+          },
+          project = {
+            hidden_files = true,
+          }
+        }
       }
     end
   },
@@ -25,5 +43,16 @@ return {
     "nvim-telescope/telescope-fzf-native.nvim",
     build = "make",
     cond = vim.fn.executable "make" == 1
+  },
+
+  {
+    "nvim-telescope/telescope-file-browser.nvim",
+    dependencies = {
+      "nvim-tree/nvim-web-devicons",
+    }
+  },
+
+  {
+    "nvim-telescope/telescope-project.nvim"
   },
 }

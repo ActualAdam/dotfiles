@@ -21,6 +21,8 @@ vim.g.maplocalleader = " "
 require("lazy").setup("plugins")
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+require("telescope").load_extension("file_browser")
+require("telescope").load_extension("project")
 
 require("settings.general").setup()
 require("settings.keymap").setup()

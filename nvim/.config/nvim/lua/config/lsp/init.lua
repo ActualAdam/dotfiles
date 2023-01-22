@@ -8,9 +8,9 @@ lsp.servers = {
   -- gopls = {},
   -- pyright = {},
   rust_analyzer = {},
-  taplo = {},
-  tsserver = {},
-  jdtls = {},
+  taplo = {}, -- toml
+  tsserver = {}, -- typescript
+  jdtls = {}, -- java
   kotlin_language_server = {},
   clojure_lsp = {},
   sumneko_lua = {
@@ -21,6 +21,13 @@ lsp.servers = {
   },
   tailwindcss = {},
   svelte = {},
+  lemminx = {
+    -- validation = {
+    --   noGrammar= "hint",
+    --   enabled = true,
+    --   schema = true,
+    -- }
+  }, -- xml
 }
 
 -- LSP settings.

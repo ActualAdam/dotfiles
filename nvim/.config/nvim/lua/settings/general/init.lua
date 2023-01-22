@@ -49,6 +49,15 @@ function general.setup()
 
 	-- Set completeopt to have a better completion experience
 	vim.o.completeopt = 'menuone,noselect'
+
+	vim.api.nvim_create_autocmd("BufWritePost", {
+		group = vim.api.nvim_create_augroup("adamGroup", {clear = true}),
+		pattern = "*.lua",
+		callback = function()
+			require("neotest").run.run()
+		end,
+	})
+
 end
 
 return general
