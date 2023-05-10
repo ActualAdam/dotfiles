@@ -9,3 +9,10 @@ alias dk9='docker kill $(docker ps -q)'
 # switch between light and dark themes
 alias ol="tmux source-file ~/.config/tmux/theme/light.tmux.conf; tmux set-environment -g background 'light'; killall -SIGUSR1 nvim"
 alias od="tmux source-file ~/.config/tmux/theme/dark.tmux.conf; tmux set-environment -g background 'dark'; killall -SIGUSR1 nvim"
+
+# exa is an ls replacement
+#
+# current directory
+alias l='exa -lia'
+# tree
+alias ll='exa -liaT'

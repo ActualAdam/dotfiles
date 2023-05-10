@@ -1,7 +1,6 @@
 zmodload zsh/zprof
 . ~/.env.sh
 . ~/.antigen.zsh
-. ~/.zsh_alias.zsh
 
 antigen use oh-my-zsh
 antigen bundle zsh-users/zsh-syntax-highlighting
@@ -13,6 +12,8 @@ antigen bundle aws
 antigen bundle vi-mode
 
 antigen apply
+
+. ~/.zsh_alias.zsh
 
 set editind-mode vi
 set blink-matching-paren on
@@ -69,14 +70,29 @@ timezsh() {
 load_nvm
 
 light() {
-    yq -i '.colors alias = "light"' ~/.config/alacritty/schemes.yml
+    yq -iy '.colors alias = "light"' ~/.config/alacritty/schemes.yml
 }
 
 dark() {
-    yq -i '.colors alias = "dark"' ~/.config/alacritty/schemes.yml
+    yq -iy '.colors alias = "dark"' ~/.config/alacritty/schemes.yml
 }
 
 # export JAVA_HOME=/Library/Java/JavaVirtualMachines/amazon-corretto-11.jdk/Contents/Home
 # echo "org.gradle.java.home=$JAVA_HOME" > /Users/actualadam/.gradle/gradle.properties
 
 . "$HOME/.sdkman/bin/sdkman-init.sh"
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/opt/homebrew/anaconda3/bin/conda' 'shell.zsh' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/opt/homebrew/anaconda3/etc/profile.d/conda.sh" ]; then
+        . "/opt/homebrew/anaconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/opt/homebrew/anaconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<
