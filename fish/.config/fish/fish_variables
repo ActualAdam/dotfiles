@@ -1,5 +1,6 @@
 # This file contains fish universal variable definitions.
 # VERSION: 3.0
+SETUVAR --export EDITOR:nvim
 SETUVAR HOMEBREW_EDITOR:nvim
 SETUVAR HOMEBREW_NO_INSTALL_FROM_API:1
 SETUVAR __fish_initialized:3400

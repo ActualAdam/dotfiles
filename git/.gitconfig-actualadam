@@ -1,0 +1,7 @@
+[user]
+name = Adam Miller
+email = adam@adammiller.name
+
+[init]
+defaultBranch = main
+
