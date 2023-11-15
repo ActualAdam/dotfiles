@@ -1,0 +1,6 @@
+alt - u : open -a "WezTerm"
+alt - i : open -a "IntelliJ IDEA Ultimate"
+alt - o : open -a "DataGrip"
+alt
+alt - n : open -a "Google Chrome"
+alt - m : open -a "Mail"
