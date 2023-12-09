@@ -12,7 +12,7 @@ end
 
 local function scheme_for_appearance(appearance)
   if appearance:find 'Dark' then
-    return 'Catppuccin Macchiato'
+    return 'Catppuccin Mocha'
   else
     return 'Catppuccin Latte'
   end
@@ -25,8 +25,9 @@ config.font_size = 13.0
 
 config.enable_tab_bar = false
 
+config.native_macos_fullscreen_mode = true
 config.window_decorations = "RESIZE"
-config.window_background_opacity = 0.95
+config.window_background_opacity = 0.90
 
 -- Spawn a fish shell in login mode
 config.default_prog = { '/opt/homebrew/bin/fish', '-l' }
