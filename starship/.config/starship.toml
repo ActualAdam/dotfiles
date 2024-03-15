@@ -1,5 +1,35 @@
+# editor completions for this file
 "$schema" = 'https://starship.rs/config-schema.json'
-"format" = "$all"
+
+"format" = """
+$all\
+$line_break\
+$directory
+$character
+"""
+
 [aws]
+format = '| [$symbol($profile )(\($region\) )(\[$duration\] )]($style)'
 symbol = ' '
 force_display = true
+
+[directory]
+format = '[$path]($style)[$read_only]($read_only_style) '
+truncation_length = 0
+truncation_symbol = ' '
+
+[docker_context]
+format = '| [$symbol$context]($style) '
+
+[git_branch]
+format = '[$symbol$branch(:$remote_branch)]($style) '
+
+[gradle]
+format = '| [$symbol($version )]($style)'
+
+[java]
+format = '| [${symbol}(${version} )]($style)'
+
+[kotlin]
+format = '| [$symbol($version )]($style)'
+symbol = ''
