@@ -1,0 +1,55 @@
+Plug 'tpope/vim-commentary'
+
+command! fu action FindUsages
+
+let mapleader = " "
+
+nnoremap <leader>fu :action FindUsages<CR>
+nnoremap <leader>fp :action $LRU<CR>
+nnoremap <leader>sg :action FindInPath<CR>
+nnoremap <leader>sf :action GotoFile<CR>
+nnoremap <leader>sc :action GotoClass<CR>
+
+
+nnoremap <leader><leader> :action RecentFiles<CR>
+
+nnoremap gd :action GotoDeclaration<CR>
+nnoremap gr :action GotoDeclaration<CR>
+nnoremap ge :action GotoNextError<CR>
+nnoremap gE :action GotoPreviousError<CR>
+nnoremap <ctrl>i :action Next<CR>
+nnoremap <ctrl>o :action Back<CR>
+
+nnoremap <leader>e :action SelectInProjectView<CR>
+
+inoremap <ctrl>y :action AcceptEntireTabnineInlineCompletionAction
+
+nnoremap <leader>wd :action ActivateDebugToolWindow<CR>
+nnoremap <leader>wr :action ActivateRunToolWindow<CR>
+
+nnoremap <leader>rn :action RenameElement<CR>
+
+""" , is the Run leader
+"""    run or debug
+nnoremap ,, :action ChooseRunConfiguration<CR>
+nnoremap ,rc :action ContextRun<CR>
+nnoremap ,rr :action Rerun<CR>
+nnoremap ,c :action RunClass<CR>
+nnoremap ,rf :action RerunFailedTests<CR>
+nnoremap ,dc :action ContextDebug<CR>
+nnoremap ,dd :action Debug<CR>
+
+"""    step debugging 
+nnoremap ,b :action ToggleLineBreakpoint<CR>
+nnoremap ,e :action EvaluateExpression<CR>
+nnoremap ,q :action Stop<CR>
+nnoremap ,j :action StepOver<CR>
+nnoremap ,h :action StepOut<CR>
+nnoremap ,l :action StepIn<CR>
+nnoremap ,n :action Resume<CR>
+
+""" ,g gradle
+noremap ,gr :action ExternalSystem.RefreshAllProjects<CR>
+
+""" ' is the Vcs leader
+nnoremap '' :action Vcs.QuickListPopupAction<CR>
