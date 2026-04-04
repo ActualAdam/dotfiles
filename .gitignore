@@ -6,3 +6,5 @@ sbt/.sbt/0.13/staging
 nvim/.config/nvim/plugin/
 
 tmux/.config/tmux/plugins/
+
+fish/.config/fish/functions/
