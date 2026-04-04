@@ -28,6 +28,7 @@ config.enable_tab_bar = false
 config.native_macos_fullscreen_mode = true
 config.window_decorations = "RESIZE"
 config.window_background_opacity = 0.90
+config.window_close_confirmation = "NeverPrompt"
 
 -- Spawn a fish shell in login mode
 config.default_prog = { '/opt/homebrew/bin/fish', '-l' }
