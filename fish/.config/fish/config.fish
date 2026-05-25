@@ -6,7 +6,7 @@ if status is-interactive
     end
 
     set -gx COLORTERM truecolor
-    nvm use lts/gallium
+    nvm use lts/jod
 end
 
 
